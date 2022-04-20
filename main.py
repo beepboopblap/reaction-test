@@ -2,7 +2,7 @@ import pygame
 from pygame import *
 import time
 import random
-from sigfig import round
+import sys
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 800
@@ -54,13 +54,11 @@ while running == True:
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if can_click == True:
-                    start = time.time()
                     click = True
                     if click == True:
                         end = time.time()
                         final = end - start
-                        final = int(final)
-                        final = round(final, sigfig = 4)
+                        final = float("{0:.2f}".format(final))
                         can_click = False
                         retry = True
 
@@ -86,10 +84,15 @@ while running == True:
         if time.time() >= x:
             red_screen = False
             window.fill(green)
+            start = time.time()
             can_click = True
+            click_text = Calibri40.render("Click!", 1, white)
+            window.blit(click_text, (110,220))
 
         if red_screen == True:
             window.fill(red)
+            get_ready = Calibri40.render("Get Ready to Click", 1, white)
+            window.blit(get_ready, (110,220))
 
         if retry == True:
             window.fill(red,)
